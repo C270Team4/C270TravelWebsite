@@ -461,7 +461,6 @@ app.post('/editTravel/:id', (req,res) => {
 
   res.redirect('/list');
 });
-
 app.post('/deleteTravel/:id', (req, res) => {
     const id = parseInt(req.params.id);
     travelList = travelList.filter(b => b.id !==id);
@@ -470,7 +469,10 @@ app.post('/deleteTravel/:id', (req, res) => {
 
 
  
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
- 
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log('Server is running at http://localhost:${port}');
+  });
+}
+
+module.exports = app;
