@@ -447,17 +447,20 @@ app.post('/contact', (req, res) => {
 
 
 app.post('/editTravel/:id', (req,res) => {
-    const id = parseInt(req.params.id);
-    for (let i=0; i<travelList.length; i++) {
-        if (travelList[i].id === id){
-            travelList[i].title = req.body.destination;
-            travelList[i].description = req.body.country;
-            travelList[i].description = req.body.description;
-            break;
-        }
+  const id = parseInt(req.params.id);
+
+  for (let i = 0; i < travelList.length; i++) {
+    if (travelList[i].id === id) {
+      travelList[i].destination = req.body.destination;
+      travelList[i].country = req.body.country;
+      travelList[i].description = req.body.description;
+      travelList[i].image = req.body.image ?? travelList[i].image; // optional
+      break;
     }
-    res.redirect('/list');
-})
+  }
+
+  res.redirect('/list');
+});
 
 app.post('/deleteTravel/:id', (req, res) => {
     const id = parseInt(req.params.id);
