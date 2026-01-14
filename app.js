@@ -7,6 +7,7 @@ const port = 3000;
 app.use(express.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
+//travel list
 let travelList = [ 
     {
         id: 1,
