@@ -134,3 +134,11 @@ test("Edit works: add → edit → confirm updated name shows", async () => {
   expect(afterRes.text).toContain(updated);
   expect(afterRes.text).not.toContain(original);
 });
+
+//edge case testing
+// 1) Case-insensitive search
+test("Edge: search should be case-insensitive (JeJu finds Jeju)", async () => {
+  const res = await request(app).get("/list?q=JeJu");
+  expect(res.statusCode).toBe(200);
+  expect(res.text).toContain("Jeju");
+});
