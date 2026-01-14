@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.14% </span>
+                <span class="strong">92.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>54/70</span>
+                <span class='fraction'>65/70</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.75% </span>
+                <span class="strong">81.25% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>11/16</span>
+                <span class='fraction'>13/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">90.9% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/11</span>
+                <span class='fraction'>10/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.92% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>50/65</span>
+                <span class='fraction'>60/65</span>
             </div>
         
             
@@ -576,7 +576,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -857,7 +857,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -890,7 +890,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -923,18 +923,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -983,7 +983,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1051,8 +1051,8 @@ let travelList = [
 &nbsp;
 &nbsp;
 //get home page
-app.get('/',<span class="fstat-no" title="function not covered" >(r</span>eq,res)=&gt;{
-<span class="cstat-no" title="statement not covered" >    res.send(`</span>
+app.get('/',(req,res)=&gt;{
+    res.send(`
         &lt;!DOCTYPE html&gt;
         &lt;html lang="en"&gt;
         &lt;head&gt;
@@ -1332,8 +1332,8 @@ app.get('/list', (req, res) =&gt; {
 &nbsp;
 &nbsp;
 //add place
-app.get('/add', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    res.send(`</span>
+app.get('/add', (req, res) =&gt; {
+    res.send(`
         &lt;div style="max-width: 500px; margin: 50px auto; font-family: Arial, sans-serif;"&gt;
             &lt;h2 style="text-align: center;"&gt;Add a New Place&lt;/h2&gt;
             &lt;form action="/add" method="POST" style="display: flex; flex-direction: column; gap: 15px;"&gt;
@@ -1365,8 +1365,8 @@ app.get('/add', <span class="fstat-no" title="function not covered" >(r</span>eq
     `);
 });
 &nbsp;
-app.get('/contact', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    res.send(`</span>
+app.get('/contact', (req, res) =&gt; {
+    res.send(`
         &lt;div style="max-width: 500px; margin: 50px auto; font-family: Arial, sans-serif;"&gt;
             &lt;h2 style="text-align: center;"&gt;Contact Me&lt;/h2&gt;
             &lt;form action="/contact" method="POST" style="display: flex; flex-direction: column; gap: 15px;"&gt;
@@ -1398,19 +1398,19 @@ app.get('/contact', <span class="fstat-no" title="function not covered" >(r</spa
     `);
 });
 &nbsp;
-app.get('/editTravel/:id', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-    const id = <span class="cstat-no" title="statement not covered" >parseInt(req.params.id);</span>
-    let travel = <span class="cstat-no" title="statement not covered" >null;</span>
+app.get('/editTravel/:id', (req, res) =&gt; {
+    const id = parseInt(req.params.id);
+    let travel = null;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    for (let i =<span class="cstat-no" title="statement not covered" >0;</span> i&lt;travelList.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >        if(travelList[i].id === id) {</span>
+    for (let i =0; i&lt;travelList.length; i++) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(travelList[i].id === id) {
 <span class="cstat-no" title="statement not covered" >            travel = travelList[i];</span>
 <span class="cstat-no" title="statement not covered" >            break;</span>
         }
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if(!travel){</span>
-<span class="cstat-no" title="statement not covered" >        return res.send('&lt;p&gt;Place not found.&lt;/p&gt;&lt;a href = "/list"&gt;Back to List&lt;/a&gt;');</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(!travel){
+        return res.send('&lt;p&gt;Place not found.&lt;/p&gt;&lt;a href = "/list"&gt;Back to List&lt;/a&gt;');
     }
 <span class="cstat-no" title="statement not covered" >    res.send(`</span>
         &lt;div style="max-width: 500px; margin: 50px auto; font-family: Arial, sans-serif;"&gt;
@@ -1458,8 +1458,8 @@ app.post('/add', (req, res) =&gt; {
     res.redirect('/list'); // Go to list page
 });
 &nbsp;
-app.post('/contact', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    res.redirect('/');</span>
+app.post('/contact', (req, res) =&gt; {
+    res.redirect('/');
 });
 &nbsp;
 &nbsp;
@@ -1498,7 +1498,11 @@ module.exports = app;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+<<<<<<< HEAD
                 at 2026-01-14T09:01:25.034Z
+=======
+                at 2026-01-14T09:09:21.595Z
+>>>>>>> 899c6347d3c3364926fb11fe44bf14d3006fc394
             </div>
         <script src="prettify.js"></script>
         <script>
