@@ -142,3 +142,9 @@ test("Edge: search should be case-insensitive (JeJu finds Jeju)", async () => {
   expect(res.statusCode).toBe(200);
   expect(res.text).toContain("Jeju");
 });
+
+// 2)Search with spaces
+test("Edge: search trims spaces ( ' jeju ' ) should not crash", async () => {
+  const res = await request(app).get("/list?q=%20jeju%20");
+  expect([200, 404]).toContain(res.statusCode);
+});

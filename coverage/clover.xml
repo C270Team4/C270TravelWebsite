@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1768377415198" clover="3.2.0">
-  <project timestamp="1768377415199" name="All files">
+<coverage generated="1768378095295" clover="3.2.0">
+  <project timestamp="1768378095296" name="All files">
     <metrics statements="65" coveredstatements="50" conditionals="16" coveredconditionals="11" methods="11" coveredmethods="5" elements="92" coveredelements="66" complexity="0" loc="65" ncloc="65" packages="1" files="1" classes="1"/>
     <file name="app.js" path="C:\Users\24047863\OneDrive - Republic Polytechnic\School\Y2\Y2S2\C270\Resource\C270TravelWebsite\app.js">
       <metrics statements="65" coveredstatements="50" conditionals="16" coveredconditionals="11" methods="11" coveredmethods="5"/>
@@ -14,18 +14,18 @@
       <line num="37" count="1" type="stmt"/>
       <line num="38" count="0" type="stmt"/>
       <line num="184" count="1" type="stmt"/>
-      <line num="185" count="9" type="stmt"/>
-      <line num="186" count="9" type="stmt"/>
-      <line num="188" count="9" type="cond" truecount="2" falsecount="0"/>
-      <line num="189" count="3" type="stmt"/>
-      <line num="190" count="14" type="stmt"/>
-      <line num="191" count="14" type="stmt"/>
-      <line num="192" count="14" type="stmt"/>
-      <line num="194" count="14" type="cond" truecount="2" falsecount="0"/>
+      <line num="185" count="10" type="stmt"/>
+      <line num="186" count="10" type="stmt"/>
+      <line num="188" count="10" type="cond" truecount="2" falsecount="0"/>
+      <line num="189" count="4" type="stmt"/>
+      <line num="190" count="20" type="stmt"/>
+      <line num="191" count="20" type="stmt"/>
+      <line num="192" count="20" type="stmt"/>
+      <line num="194" count="20" type="cond" truecount="2" falsecount="0"/>
       <line num="198" count="2" type="stmt"/>
-      <line num="201" count="3" type="cond" truecount="2" falsecount="0"/>
-      <line num="202" count="1" type="stmt"/>
-      <line num="216" count="1" type="stmt"/>
+      <line num="201" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="202" count="2" type="stmt"/>
+      <line num="216" count="2" type="stmt"/>
       <line num="219" count="6" type="stmt"/>
       <line num="222" count="8" type="stmt"/>
       <line num="223" count="8" type="stmt"/>
