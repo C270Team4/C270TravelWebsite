@@ -137,30 +137,35 @@ test("Edit works: add → edit → confirm updated name shows", async () => {
 
 //edge case testing
 // 1) Case-insensitive search
-test("Edge: search should be case-insensitive (JeJu finds Jeju)", async () => {
+test("Edge: search is case-insensitive (JeJu finds Jeju)", async () => {
   const res = await request(app).get("/list?q=JeJu");
   expect(res.statusCode).toBe(200);
   expect(res.text).toContain("Jeju");
 });
 
 // 2)Search with spaces
-test("Edge: search trims spaces ( ' jeju ' ) should not crash", async () => {
+//error handling for spaces
+test("Edge: search with spaces (' jeju ') returns 404 because app does not trim", async () => {
   const res = await request(app).get("/list?q=%20jeju%20");
-  expect([200, 404]).toContain(res.statusCode);
+  expect(res.statusCode).toBe(404);
+  expect(res.text).toContain("No destinations found");
 });
 
 // 3) duplicate destination names
 //when there is duplicated names the system wont crash or lag
-test("Edge: adding duplicate destination should not crash", async () => {
+test("Edge: adding duplicate destination name still works (both redirect)", async () => {
   const name = "Duplicate_" + Date.now();
 
-  await request(app).post("/add").type("form").send({
+  const res1 = await request(app).post("/add").type("form").send({
     destination: name, country: "SG", description: "1", image: "a.jpg",
   });
 
-  const res = await request(app).post("/add").type("form").send({
+  const res2 = await request(app).post("/add").type("form").send({
     destination: name, country: "SG", description: "2", image: "b.jpg",
   });
 
-  expect(res.statusCode).toBe(302);
+  expect(res1.statusCode).toBe(302);
+  expect(res2.statusCode).toBe(302);
+  expect(res1.headers.location).toBe("/list");
+  expect(res2.headers.location).toBe("/list");
 });
