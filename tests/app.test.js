@@ -169,3 +169,41 @@ test("Edge: adding duplicate destination name still works (both redirect)", asyn
   expect(res1.headers.location).toBe("/list");
   expect(res2.headers.location).toBe("/list");
 });
+
+// 4) checks whether the home page ("/") is accessible.
+// It ensures the server responds successfully when a user visits the homepage
+test("GET / returns 200 (home page)", async () => {
+  const res = await request(app).get("/");
+  expect(res.statusCode).toBe(200);
+});
+
+
+// 5) checks that the "Add New Place" page loads successfully.
+// ensures the server responds with HTTP 200 when accessing the /add route.
+test("GET /add returns 200", async () => {
+  const res = await request(app).get("/add");
+  expect(res.statusCode).toBe(200);
+});
+
+
+// 6) checks whether the Contact page is accessible.
+// It ensures the server returns HTTP 200 when visiting /contact.
+test("GET /contact returns 200", async () => {
+  const res = await request(app).get("/contact");
+  expect(res.statusCode).toBe(200);
+});
+
+// 7)test handles an edge case where a non-existent ID is provided.
+// It ensures the system displays a "Place not found" message instead of crashing.
+test("GET /editTravel/999999 shows not found", async () => {
+  const res = await request(app).get("/editTravel/999999");
+  expect(res.text).toContain("Place not found");
+});
+
+// 8)the contact form submission behaviour stablility.
+// It ensures that after submitting the form, the user is redirected back to the homepage
+test("POST /contact redirects to /", async () => {
+  const res = await request(app).post("/contact").type("form").send({});
+  expect(res.statusCode).toBe(302);
+  expect(res.headers.location).toBe("/");
+});
