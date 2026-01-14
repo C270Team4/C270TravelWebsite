@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  travel-website:
+    image: ryukic/your-app-name:latest
+    deploy:
+      replicas: 3  # Number of instances (replicas) of your app
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+      placement:
+        constraints:
+          - node.role == manager  # Optional: deploy on manager node only
+    ports:
+      - "3000:3000"  # Exposing port 3000 for external access
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=production
+
+networks:
+  app-network:
+    driver: overlay  # Use overlay network for communication between Swarm nodes
