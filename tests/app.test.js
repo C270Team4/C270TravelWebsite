@@ -148,3 +148,19 @@ test("Edge: search trims spaces ( ' jeju ' ) should not crash", async () => {
   const res = await request(app).get("/list?q=%20jeju%20");
   expect([200, 404]).toContain(res.statusCode);
 });
+
+// 3) duplicate destination names
+//when there is duplicated names the system wont crash or lag
+test("Edge: adding duplicate destination should not crash", async () => {
+  const name = "Duplicate_" + Date.now();
+
+  await request(app).post("/add").type("form").send({
+    destination: name, country: "SG", description: "1", image: "a.jpg",
+  });
+
+  const res = await request(app).post("/add").type("form").send({
+    destination: name, country: "SG", description: "2", image: "b.jpg",
+  });
+
+  expect(res.statusCode).toBe(302);
+});
