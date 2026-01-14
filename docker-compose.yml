@@ -2,16 +2,15 @@ version: '3.8'
 
 services:
   travel-website:
-    image: ryukic/your-app-name:latest
+    image: ryukic/c270travelwebsite:latest
     deploy:
       replicas: 3  # Number of instances (replicas) of your app
       resources:
         limits:
           cpus: "0.5"
           memory: 512M
-      placement:
-        constraints:
-          - node.role == manager  # Optional: deploy on manager node only
+      restart_policy:
+        condition: on-failure
     ports:
       - "3000:3000"  # Exposing port 3000 for external access
     networks:
