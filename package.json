@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --ci"
+    "test": "jest --coverage --ci",
+    "perf:normal": "node tests/perf/runPerf.js http://localhost:3000 500 10",
+    "perf:stress": "node tests/perf/runPerf.js http://localhost:3000 5000 10",
+    "perf:limit": "node tests/perf/findLimit.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +15,7 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "autocannon": "^8.0.0",
     "jest": "^30.2.0",
     "supertest": "^7.2.2"
   },
