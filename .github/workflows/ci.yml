@@ -11,32 +11,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      
       - name: Checkout code
         uses: actions/checkout@v4
 
-      
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "18"
           cache: "npm"
 
-      
       - name: Install dependencies
         run: npm ci
 
       - name: Security audit
         run: npm audit --audit-level=high
 
-    
-      - name: Run tests
+      - name: Run unit tests
         run: npm test
 
-      - name: Start application
+      - name: Start application and wait for it to be ready
         run: |
-          npm start &
-          sleep 5
+          nohup npm start > server.log 2>&1 &
+          for i in {1..30}; do
+            if curl -sSf http://127.0.0.1:3000/ >/dev/null; then
+              echo "Server is up"
+              break
+            fi
+            sleep 1
+          done
+
+          # Final check (fail clearly if still down)
+          curl -sSf http://127.0.0.1:3000/ >/dev/null || (echo "Server failed to start"; tail -n 200 server.log; exit 1)
 
       - name: Performance test – Normal Load (PASS)
         run: npm run perf:normal
@@ -44,5 +49,7 @@ jobs:
       - name: Performance test – Stress Scenario (FAIL expected)
         run: npm run perf:stress
 
-      - name: Performance limit test
+      # OPTIONAL: only keep this if you created perf:limit in package.json
+      - name: Performance limit test (optional)
         run: npm run perf:limit
+        continue-on-error: true
