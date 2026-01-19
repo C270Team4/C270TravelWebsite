@@ -155,21 +155,7 @@ test("Edge: search with spaces (' jeju ') returns 404 because app does not trim"
 
 // check duplicate destination names
 //when there is duplicated names the system wont crash or lag (allow duplicate entries)
-test("Edge: adding duplicate destination should not crash", async () => {
-  const name = "Duplicate_" + Date.now();
-
-  await request(app).post("/add").type("form").send({
-    destination: name, country: "SG", description: "1", image: "a.jpg",
-  });
-
-  const res = await request(app).post("/add").type("form").send({
-    destination: name, country: "SG", description: "2", image: "b.jpg",
-  });
-
-  expect(res.statusCode).toBe(302);
-});
-// FAILED version – expected behaviour ( no validation/ duplicate check)
-// test("Edge: duplicate destination should be rejected", async () => {
+// test("Edge: adding duplicate destination should not crash", async () => {
 //   const name = "Duplicate_" + Date.now();
 
 //   await request(app).post("/add").type("form").send({
@@ -179,9 +165,23 @@ test("Edge: adding duplicate destination should not crash", async () => {
 //   const res = await request(app).post("/add").type("form").send({
 //     destination: name, country: "SG", description: "2", image: "b.jpg",
 //   });
-//   expect(res.statusCode).toBe(400);   // reject duplicate
-//   expect(res.text).toContain("already exists");
+
+//   expect(res.statusCode).toBe(302);
 // });
+// FAILED version – expected behaviour ( no validation/ duplicate check)
+test("Edge: duplicate destination should be rejected", async () => {
+  const name = "Duplicate_" + Date.now();
+
+  await request(app).post("/add").type("form").send({
+    destination: name, country: "SG", description: "1", image: "a.jpg",
+  });
+
+  const res = await request(app).post("/add").type("form").send({
+    destination: name, country: "SG", description: "2", image: "b.jpg",
+  });
+  expect(res.statusCode).toBe(400);   // reject duplicate
+  expect(res.text).toContain("already exists");
+});
 
 
 
