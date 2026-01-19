@@ -187,7 +187,7 @@ test("Edge: adding duplicate destination should not crash", async () => {
 
 
 // edit invaild id
-// This test handles an edge case where a non-existent ID is provided.
+// This test checks how the system behaves when attempting to delete a non-existent ID.
 // It ensures the system redirect properly instead of crashing.
 
 test("Edge: deleting non-existent ID still redirects safely", async () => {
