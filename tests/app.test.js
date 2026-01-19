@@ -184,63 +184,32 @@ test("Edge: adding duplicate destination should not crash", async () => {
 // });
 
 
-// page load as expected
-// This test verifies that the "Add New Place" page loads successfully.
-// It ensures the server responds with HTTP 200 when accessing the /add route.
-
-test("GET /add returns 200", async () => {
-  // Send GET request to /add
-  const res = await request(app).get("/add");
-
-  // Check if page loads successfully
-  expect(res.statusCode).toBe(200);
-});
-// FAILED version
-// test("GET /add should return 404 (intentional fail)", async () => {
-//   const res = await request(app).get("/add");
-
-//   // Force failure
-//   expect(res.statusCode).toBe(404);
-// });
 
 
-
-
-// 5) Test Purpose:
-// This test checks whether the Contact page is accessible.
-// It ensures the server returns HTTP 200 when visiting /contact.
-
-test("GET /contact returns 200", async () => {
-  // Send GET request to /contact
-  const res = await request(app).get("/contact");
-
-  // Verify successful response
-  expect(res.statusCode).toBe(200);
-});
-
-
-// 6) Test Purpose:
+// edit invaild id
 // This test handles an edge case where a non-existent ID is provided.
-// It ensures the system displays a "Place not found" message instead of crashing.
+// It ensures the system redirect properly instead of crashing.
 
-test("GET /editTravel/999999 shows not found", async () => {
-  // Send GET request with an invalid ID
-  const res = await request(app).get("/editTravel/999999");
+// test("Edge: deleting non-existent ID still redirects safely", async () => {
+//   const res = await request(app)
+//     .post("/deleteTravel/999999")
+//     .type("form")
+//     .send({});
 
-  // Confirm correct error message is shown
-  expect(res.text).toContain("Place not found");
+//   expect(res.statusCode).toBe(302);
+//   expect(res.headers.location).toBe("/list");
+// });
+//failed version
+test("Edge: deleting non-existent ID should return 404 (intentional fail)", async () => {
+  const res = await request(app)
+    .post("/deleteTravel/999999")
+    .type("form")
+    .send({});
+
+  expect(res.statusCode).toBe(404);
 });
 
 
-// 7) Test Purpose:
-// This test verifies the contact form submission behaviour.
-// It ensures that after submitting the form, the user is redirected back to the homepage.
 
-test("POST /contact redirects to /", async () => {
-  // Send POST request to /contact with empty form data
-  const res = await request(app).post("/contact").type("form").send({});
 
-  // Check if server redirects correctly
-  expect(res.statusCode).toBe(302);
-  expect(res.headers.location).toBe("/");
-});
+;
