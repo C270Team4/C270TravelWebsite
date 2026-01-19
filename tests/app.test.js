@@ -136,30 +136,19 @@ test("Edit works: add → edit → confirm updated name shows", async () => {
 });
 
 //edge case testing
-// 1) Case-insensitive search
-// test.each([
-//   "JeJu",
-//   "JEJU",
-//   "jeju",
-//   "jEjU"
-// ])("Edge: case-insensitive search works for %s", async (query) => {
-//   const res = await request(app).get(`/list?q=${query}`);
-//   expect(res.statusCode).toBe(200);
-//   expect(res.text).toContain("Jeju");
+// // Search with spaces
+// test("Edge: search with spaces (' jeju ') returns 404 because app does not trim", async () => {
+//   const res = await request(app).get("/list?q=%20jeju%20");
+//   expect(res.statusCode).toBe(404);
+//   expect(res.text).toContain("No destinations found");
 // });
-
-test("Edge: search should be case-insensitive (JeJu finds Jeju)", async () => {
-  const res = await request(app).get("/list?q=JeJu");
-  expect(res.statusCode).toBe(404);
+//failed version
+test("Edge: search with spaces (' jeju ') should still find Jeju", async () => {
+  const res = await request(app).get("/list?q=%20jeju%20");
+  expect(res.statusCode).toBe(200);
   expect(res.text).toContain("Jeju");
 });
 
-// 2)Search with spaces
-test("Edge: search with spaces (' jeju ') returns 404 because app does not trim", async () => {
-  const res = await request(app).get("/list?q=%20jeju%20");
-  expect(res.statusCode).toBe(404);
-  expect(res.text).toContain("No destinations found");
-});
 
 
 // 3) duplicate destination names

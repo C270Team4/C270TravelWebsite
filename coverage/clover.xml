@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1768840444444" clover="3.2.0">
-  <project timestamp="1768840444444" name="All files">
+<coverage generated="1768843949070" clover="3.2.0">
+  <project timestamp="1768843949070" name="All files">
     <metrics statements="65" coveredstatements="59" conditionals="18" coveredconditionals="15" methods="11" coveredmethods="9" elements="94" coveredelements="83" complexity="0" loc="65" ncloc="65" packages="1" files="1" classes="1"/>
     <file name="app.js" path="C:\Users\24047863\OneDrive - Republic Polytechnic\School\Y2\Y2S2\C270\Resource\C270TravelWebsite\app.js">
       <metrics statements="65" coveredstatements="59" conditionals="18" coveredconditionals="15" methods="11" coveredmethods="9"/>
@@ -14,23 +14,23 @@
       <line num="38" count="1" type="stmt"/>
       <line num="39" count="0" type="stmt"/>
       <line num="185" count="1" type="stmt"/>
-      <line num="186" count="10" type="stmt"/>
-      <line num="187" count="10" type="stmt"/>
-      <line num="189" count="10" type="cond" truecount="2" falsecount="0"/>
-      <line num="190" count="4" type="stmt"/>
-      <line num="191" count="20" type="stmt"/>
-      <line num="192" count="20" type="stmt"/>
-      <line num="193" count="20" type="stmt"/>
-      <line num="195" count="20" type="cond" truecount="2" falsecount="0"/>
-      <line num="199" count="2" type="stmt"/>
-      <line num="202" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="186" count="9" type="stmt"/>
+      <line num="187" count="9" type="stmt"/>
+      <line num="189" count="9" type="cond" truecount="2" falsecount="0"/>
+      <line num="190" count="3" type="stmt"/>
+      <line num="191" count="14" type="stmt"/>
+      <line num="192" count="14" type="stmt"/>
+      <line num="193" count="14" type="stmt"/>
+      <line num="195" count="14" type="cond" truecount="2" falsecount="0"/>
+      <line num="199" count="1" type="stmt"/>
+      <line num="202" count="3" type="cond" truecount="2" falsecount="0"/>
       <line num="203" count="2" type="stmt"/>
       <line num="217" count="2" type="stmt"/>
       <line num="220" count="6" type="stmt"/>
-      <line num="223" count="8" type="stmt"/>
-      <line num="224" count="8" type="stmt"/>
-      <line num="225" count="33" type="stmt"/>
-      <line num="247" count="8" type="stmt"/>
+      <line num="223" count="7" type="stmt"/>
+      <line num="224" count="7" type="stmt"/>
+      <line num="225" count="32" type="stmt"/>
+      <line num="247" count="7" type="stmt"/>
       <line num="319" count="1" type="stmt"/>
       <line num="320" count="1" type="stmt"/>
       <line num="352" count="1" type="stmt"/>
