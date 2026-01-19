@@ -137,11 +137,17 @@ test("Edit works: add → edit → confirm updated name shows", async () => {
 
 //edge case testing
 // 1) Case-insensitive search
-test("Edge: search should be case-insensitive (JeJu finds Jeju)", async () => {
-  const res = await request(app).get("/list?q=JeJu");
+test.each([
+  "JeJu",
+  "JEJU",
+  "jeju",
+  "jEjU"
+])("Edge: case-insensitive search works for %s", async (query) => {
+  const res = await request(app).get(`/list?q=${query}`);
   expect(res.statusCode).toBe(200);
   expect(res.text).toContain("Jeju");
 });
+
 // test("Edge: search should be case-insensitive (JeJu finds Jeju)", async () => {
 //   const res = await request(app).get("/list?q=JeJu");
 //   expect(res.statusCode).toBe(404);
