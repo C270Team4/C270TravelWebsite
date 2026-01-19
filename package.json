@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
     "test": "jest --coverage --ci",
     "perf:normal": "node tests/perf/runPerf.js http://127.0.0.1:3000 50 10",
     "perf:stress": "node tests/perf/runPerf.js http://127.0.0.1:3000 5000 10",    
