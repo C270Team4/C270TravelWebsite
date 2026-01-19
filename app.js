@@ -112,7 +112,7 @@ app.get('/',(req,res)=>{
             </div>
 
             <div class="text-center my-5">
-                <h3>Hi, Explorers! ⋆｡ﾟ☁︎｡✈︎⋆｡ ﾟ☾ ﾟ｡⋆</h2>
+                <h3>Hi, Explorers!!! ⋆｡ﾟ☁︎｡✈︎⋆｡ ﾟ☾ ﾟ｡⋆</h2>
                 <p>I’m Zi Han! Travelling has always been my dream - I love discovering new places, cultures, food and beutiful sights around the world!</p>
                 <p><i>Explore the destination I wish to visit one day</i></p>
             </div>
