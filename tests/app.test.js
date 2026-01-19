@@ -188,20 +188,20 @@ test("Edge: adding duplicate destination should not crash", async () => {
 // This test verifies that the "Add New Place" page loads successfully.
 // It ensures the server responds with HTTP 200 when accessing the /add route.
 
-// test("GET /add returns 200", async () => {
-//   // Send GET request to /add
-//   const res = await request(app).get("/add");
-
-//   // Check if page loads successfully
-//   expect(res.statusCode).toBe(200);
-// });
-// FAILED version
-test("GET /add should return 404 (intentional fail)", async () => {
+test("GET /add returns 200", async () => {
+  // Send GET request to /add
   const res = await request(app).get("/add");
 
-  // Force failure
-  expect(res.statusCode).toBe(404);
+  // Check if page loads successfully
+  expect(res.statusCode).toBe(200);
 });
+// FAILED version
+// test("GET /add should return 404 (intentional fail)", async () => {
+//   const res = await request(app).get("/add");
+
+//   // Force failure
+//   expect(res.statusCode).toBe(404);
+// });
 
 
 
