@@ -153,7 +153,7 @@ test("Edge: search with spaces (' jeju ') returns 404 because app does not trim"
 
 
 
-// duplicate destination names
+// check duplicate destination names
 //when there is duplicated names the system wont crash or lag (allow duplicate entries)
 test("Edge: adding duplicate destination should not crash", async () => {
   const name = "Duplicate_" + Date.now();
@@ -184,17 +184,26 @@ test("Edge: adding duplicate destination should not crash", async () => {
 // });
 
 
-// 4) Test Purpose:
+// page load as expected
 // This test verifies that the "Add New Place" page loads successfully.
 // It ensures the server responds with HTTP 200 when accessing the /add route.
 
-test("GET /add returns 200", async () => {
-  // Send GET request to /add
+// test("GET /add returns 200", async () => {
+//   // Send GET request to /add
+//   const res = await request(app).get("/add");
+
+//   // Check if page loads successfully
+//   expect(res.statusCode).toBe(200);
+// });
+// FAILED version
+test("GET /add should return 404 (intentional fail)", async () => {
   const res = await request(app).get("/add");
 
-  // Check if page loads successfully
-  expect(res.statusCode).toBe(200);
+  // Force failure
+  expect(res.statusCode).toBe(404);
 });
+
+
 
 
 // 5) Test Purpose:
