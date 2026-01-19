@@ -137,7 +137,7 @@ test("Edit works: add → edit → confirm updated name shows", async () => {
 
 //edge case testing
 // Search with spaces
-//return spaces when there are spaces
+// return spaces when there are spaces
 // test("Edge: search with spaces (' jeju ') returns 404 because app does not trim", async () => {
 //   const res = await request(app).get("/list?q=%20jeju%20");
 //   expect(res.statusCode).toBe(404);
