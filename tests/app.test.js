@@ -190,24 +190,24 @@ test("Edge: adding duplicate destination should not crash", async () => {
 // This test checks how the system behaves when attempting to delete a non-existent ID.
 // It ensures the system redirect properly instead of crashing.
 
-// test("Edge: deleting non-existent ID still redirects safely", async () => {
-//   const res = await request(app)
-//     .post("/deleteTravel/999999")
-//     .type("form")
-//     .send({});
-
-//   expect(res.statusCode).toBe(302);
-//   expect(res.headers.location).toBe("/list");
-// });
-//failed version
-test("Edge: deleting non-existent ID should return 404 (intentional fail)", async () => {
+test("Edge: deleting non-existent ID still redirects safely", async () => {
   const res = await request(app)
     .post("/deleteTravel/999999")
     .type("form")
     .send({});
 
-  expect(res.statusCode).toBe(404);
+  expect(res.statusCode).toBe(302);
+  expect(res.headers.location).toBe("/list");
 });
+//failed version
+// test("Edge: deleting non-existent ID should return 404 (intentional fail)", async () => {
+//   const res = await request(app)
+//     .post("/deleteTravel/999999")
+//     .type("form")
+//     .send({});
+
+//   expect(res.statusCode).toBe(404);
+// });
 
 
 // functionality testing (improvement)
