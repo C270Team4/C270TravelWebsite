@@ -51,7 +51,7 @@ function main() {
 
       process.exit(pass ? 0 : 2);
     }
-  );
+  ); 
 
   autocannon.track(inst, { renderProgressBar: true });
 }

@@ -8,7 +8,7 @@ const MAX_P99_MS = 1000;
 const MAX_ERROR_RATE = 0.01;
 
 // test steps
-const LOAD_STEPS = [50, 100, 200, 500, 1000, 2000];
+const LOAD_STEPS = [50, 100, 200, 500, 1000, 2000, 4000];
 
 function runTest(connections) {
   return new Promise((resolve) => {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1768895260113" clover="3.2.0">
-  <project timestamp="1768895260114" name="All files">
+<coverage generated="1769065563618" clover="3.2.0">
+  <project timestamp="1769065563618" name="All files">
     <metrics statements="65" coveredstatements="59" conditionals="18" coveredconditionals="15" methods="11" coveredmethods="7" elements="94" coveredelements="81" complexity="0" loc="65" ncloc="65" packages="1" files="1" classes="1"/>
-    <file name="app.js" path="C:\Users\24047863\OneDrive - Republic Polytechnic\School\Y2\Y2S2\C270\Resource\C270TravelWebsite\app.js">
+    <file name="app.js" path="C:\C270\PS Assignment\C270TravelWebsite\app.js">
       <metrics statements="65" coveredstatements="59" conditionals="18" coveredconditionals="15" methods="11" coveredmethods="7"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
