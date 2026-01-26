@@ -37,7 +37,10 @@ jobs:
         env:
           PORT: 3000
         run: |
+          # Start the application in the background
           nohup npm start > server.log 2>&1 &
+
+          # Wait until the server responds on port 3000
           for i in {1..30}; do
             if curl -sSf http://127.0.0.1:3000/ >/dev/null; then
               echo "Server is up"
@@ -46,15 +49,18 @@ jobs:
             sleep 1
           done
 
-          # Final check (fail clearly if still down)
+          # Fail the pipeline if the server did not start
           curl -sSf http://127.0.0.1:3000/ >/dev/null || (echo "Server failed to start"; tail -n 200 server.log; exit 1)
 
 
       - name: Performance test – Normal Load (PASS)
+        # Tests expected user traffic and verifies baseline performance
         run: npm run perf:normal
 
-      - name: Performance test – Stress Scenario (FAIL expected)
+      - name: Performance test – Stress Scenario
+        # Applies high load to observe behaviour under stress
         run: npm run perf:stress
 
       - name: Performance limit test
+        # Increases load step-by-step to find maximum supported users
         run: npm run perf:limit
