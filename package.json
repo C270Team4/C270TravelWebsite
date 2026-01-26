@@ -13,8 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0",
-    "lodash": "^4.17.15"
+    "express": "^5.1.0"
   },
   "devDependencies": {
     "autocannon": "^8.0.0",
