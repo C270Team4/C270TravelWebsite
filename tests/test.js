@@ -1,0 +1,1 @@
+const aws_key = process.env.AWS_ACCESS_KEY;
