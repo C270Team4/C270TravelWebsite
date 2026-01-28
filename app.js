@@ -1,4 +1,5 @@
 const express = require('express');
+//xss protection
 function escapeHTML(text) {
   return text
     .replace(/&/g, "&amp;")
