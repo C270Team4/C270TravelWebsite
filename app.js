@@ -1,4 +1,13 @@
 const express = require('express');
+function escapeHTML(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 const app = express();
 const path = require('path');
 const port = process.env.PORT || 3000;
@@ -209,12 +218,14 @@ app.get('/list', (req, res) => {
                 </head>
                 <body class="text-center mt-5">
                     <h1 style="font-size: 80px;">404</h1>
-                    <p style="font-size: 24px;">No destinations found for "<strong>${search}</strong>"</p>
+                    <p style="font-size: 24px;">No destinations found for "<strong>${escapeHTML(search)}</strong>"</p>
                     <a href="/list" class="btn btn-dark mt-3">Back to Travel List</a>
                 </body>
                 </html>
             `);
             return; 
+
+            
         }
     } else {
         filteredList = travelList; // no search, show everything
@@ -227,9 +238,9 @@ app.get('/list', (req, res) => {
                 <div class="card h-100 align-items-center py-5" style="background-color: #FCF7F7;">
                     <img src="images/${filteredList[i].image}" class="card-img-top" alt="${filteredList[i].destination}" style="width: 300px; height: 200px; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="card-title">${filteredList[i].destination}</h5>
-                        <p class="card-text">${filteredList[i].country}</p>
-                        <p>Comments: ${filteredList[i].description}</p>
+                        <h5 class="card-title">${escapeHTML(filteredList[i].destination)}</h5>
+                        <p class="card-text">${escapeHTML(filteredList[i].country)}</p>
+                        <p>Comments: ${escapeHTML(filteredList[i].description)}</p>
                         <form action='/editTravel/${filteredList[i].id}' method='GET' style="display: inline-block; margin-right: 10px;">
                             <button type='submit'>Edit</button>
                         </form>
@@ -402,15 +413,15 @@ app.get('/editTravel/:id', (req, res) => {
             <form action="/editTravel/${travel.id}" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
                 <div>
                     <label>Destination:</label><br>
-                    <input type="text" name="destination" value="${travel.destination}" style="width: 100%; padding: 8px;" required>
+                    <input type="text" name="destination" value="${escapeHTML(travel.destination)}" style="width: 100%; padding: 8px;" required>
                 </div>
                 <div>
                     <label>Country:</label><br>
-                    <input type="text" name="country" value="${travel.country}" style="width: 100%; padding: 8px;" required>
+                    <input type="text" name="country" value="${escapeHTML(travel.country)}" style="width: 100%; padding: 8px;" required>
                 </div>
                 <div>
                     <label>Description:</label><br>
-                    <input type="text" name="description" value="${travel.description}" style="width: 100%; padding: 8px;" required>
+                    <input type="text" name="description" value="${escapeHTML(travel.description)}" style="width: 100%; padding: 8px;" required>
                 </div>
                 <button type="submit" style="padding: 10px; background-color: #000000; color: white; border: none; cursor: pointer;">
                     Update Comic
