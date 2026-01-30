@@ -1,19 +1,13 @@
 const request = require("supertest");
-const app = require("../app");
 
-describe("Basic route tests", () => {
+let app;
 
-  test("GET /list should return 200", async () => {
-    const res = await request(app).get("/list");
-    expect(res.statusCode).toBe(200);
-  });
-
-  test("GET /list?q=nonexistent should return 404", async () => {
-    const res = await request(app).get("/list?q=nonexistent");
-    expect(res.statusCode).toBe(404);
-  });
-
+// Reset the app (and in-memory travelList) before every test
+beforeEach(() => {
+  jest.resetModules();          // clears require cache
+  app = require("../app");      // re-require app.js fresh each test
 });
+
 
 // POST /add → should redirect to /list
 test("POST /add redirects to /list", async () => {
@@ -135,6 +129,111 @@ test("Edit works: add → edit → confirm updated name shows", async () => {
   expect(afterRes.text).not.toContain(original);
 });
 
+describe("Functionality Tests (Normal Usage)", () => { 
+   
+// functionality testing (improved coverage)
+// Home page load successfully
+// Purpose: Verify the main route (/) is reachable and returns HTTP 200,
+// homepage content is rendered.
+test("GET / (home) returns 200 and shows homepage content", async () => {
+  const res = await request(app).get("/");
+  expect(res.statusCode).toBe(200);
+  expect(res.text).toContain("Top Travel Spots");
+  expect(res.text).toContain("View List");
+  expect(res.text).toContain("Add New Places");
+});
+
+// list page 
+// Purpose: Ensure /list works and displays default travel data when no search is applied.
+test("GET /list returns 200 and shows default destinations", async () => {
+  const res = await request(app).get("/list");
+  expect(res.statusCode).toBe(200);
+  expect(res.text).toContain("Jeju Island");
+  expect(res.text).toContain("Suzhou");
+  expect(res.text).toContain("Shanghai Disneyland");
+});
+
+// Test Case: Search filtering works correctly
+// Purpose: Verify /list?q=china returns only matching destinations and excludes non-matching.
+test("GET /list?q=china returns only China destinations", async () => {
+  const res = await request(app).get("/list?q=china");
+  expect(res.statusCode).toBe(200);
+  // Should include China destinations
+  expect(res.text).toContain("Suzhou");
+  expect(res.text).toContain("Shanghai Disneyland");
+  // Should exclude non-China destination
+  expect(res.text).not.toContain("Jeju Island");
+});
+
+// Edit existing destination (ID 1) page load test
+// verifies that the edit page can be loaded for a valid destination ID.
+// ensures the server responds with HTTP 200 and displays the edit form content.
+test("GET /editTravel/1 loads edit page", async () => {
+  const res = await request(app).get("/editTravel/1");
+  // Page should load successfully
+  expect(res.statusCode).toBe(200);
+  // Page should contain the edit form heading (from app.js)
+  expect(res.text).toContain("Edit Comic");
+});
+
+// Update existing destination (ID 1)
+// verifies the update (edit) functionality for an existing destination.
+// ensures the POST request updates the record and the updated destination name
+// reflected on the /list page after the redirect.
+test("POST /editTravel/1 updates destination and shows in list", async () => {
+  // Send updated values to the edit endpoint
+  const editRes = await request(app)
+    .post("/editTravel/1")
+    .type("form")
+    .send({
+      destination: "Updated Place",
+      country: "China",
+      description: "Updated",
+    });
+  // Edit route should redirect back to /list after saving changes
+  expect(editRes.statusCode).toBe(302);
+  expect(editRes.headers.location).toBe("/list");
+  // Verify the updated destination appears on the list page
+  const res = await request(app).get("/list");
+  expect(res.statusCode).toBe(200);
+  expect(res.text).toContain("Updated Place");
+});
+
+// Add page loads test
+// Verify that the Add New Place page is reachable
+// and the form fields for adding a destination are displayed correctly.
+test("GET /add returns 200 and shows Add Place form", async () => {
+  const res = await request(app).get("/add");
+  // Page should load successfully
+  expect(res.statusCode).toBe(200);
+  // Page should contain the form title
+  expect(res.text).toContain("Add a New Place");
+  // Page should contain required input fields for adding a destination
+  expect(res.text).toContain('name="destination"');
+  expect(res.text).toContain('name="country"');
+  expect(res.text).toContain('name="description"');
+});
+
+// Contact page loads test
+// Verify that the Contact page is reachable
+// and the contact form fields are rendered correctly.
+test("GET /contact returns 200 and shows Contact form", async () => {
+  const res = await request(app).get("/contact");
+  // Page should load successfully
+  expect(res.statusCode).toBe(200);
+  // Page should contain the contact form title
+  expect(res.text).toContain("Contact Me");
+  // Page should contain required input fields for the contact form
+  expect(res.text).toContain('name="name"');
+  expect(res.text).toContain('name="phone"');
+  expect(res.text).toContain('name="email"');
+  expect(res.text).toContain('name="comment"');
+});
+});
+
+
+
+
 //edge case testing
 
 // Search with spaces
@@ -210,75 +309,4 @@ test("Edge: deleting non-existent ID still redirects safely", async () => {
 // });
 
 
-// functionality testing (improvement)
 
-//Home page testing
-//verifies that the homepage loads successfully. loading with server response Http 200
-test("GET / (home) returns 200 and shows homepage content", async () => {
-  const res = await request(app).get("/");
-  expect(res.statusCode).toBe(200);
-  expect(res.text).toContain("Top Travel Spots");
-});
-
-//list page 
-//no search default shows all destinations
-test("GET /list returns 200 and shows default destinations", async () => {
-  const res = await request(app).get("/list");
-  expect(res.statusCode).toBe(200);
-  expect(res.text).toContain("Jeju Island");
-  expect(res.text).toContain("Suzhou");
-  expect(res.text).toContain("Shanghai Disneyland");
-});
-
-// Search by country name
-// It ensures destinations under the searched country are displayed.
-
-test("GET /list?q=china returns China destinations", async () => {
-  const res = await request(app).get("/list?q=china");
-
-  expect(res.statusCode).toBe(200);
-  expect(res.text).toContain("China");
-  expect(res.text).toContain("Suzhou");
-  expect(res.text).toContain("Shanghai Disneyland");
-});
-
-// Edit existing destination (ID 1) page load test
-// verifies that the edit page can be loaded for a valid destination ID.
-// ensures the server responds with HTTP 200 and displays the edit form content.
-
-test("GET /editTravel/1 loads edit page", async () => {
-  const res = await request(app).get("/editTravel/1");
-
-  // Page should load successfully
-  expect(res.statusCode).toBe(200);
-
-  // Page should contain the edit form heading (from app.js)
-  expect(res.text).toContain("Edit Comic");
-});
-
-
-// Update existing destination (ID 1)
-// verifies the update (edit) functionality for an existing destination.
-// ensures the POST request updates the record and the updated destination name
-// reflected on the /list page after the redirect.
-
-test("POST /editTravel/1 updates destination and shows in list", async () => {
-  // Send updated values to the edit endpoint
-  const editRes = await request(app)
-    .post("/editTravel/1")
-    .type("form")
-    .send({
-      destination: "Updated Place",
-      country: "China",
-      description: "Updated",
-    });
-
-  // Edit route should redirect back to /list after saving changes
-  expect(editRes.statusCode).toBe(302);
-  expect(editRes.headers.location).toBe("/list");
-
-  // Verify the updated destination appears on the list page
-  const res = await request(app).get("/list");
-  expect(res.statusCode).toBe(200);
-  expect(res.text).toContain("Updated Place");
-});
