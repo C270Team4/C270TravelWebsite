@@ -156,80 +156,80 @@ test("GET /list returns 200 and shows default destinations", async () => {
 
 // Test Case: Search filtering works correctly
 // Purpose: Verify /list?q=china returns only matching destinations and excludes non-matching.
-// test("GET /list?q=china returns only China destinations", async () => {
-//   const res = await request(app).get("/list?q=china");
-//   expect(res.statusCode).toBe(200);
-//   // Should include China destinations
-//   expect(res.text).toContain("Suzhou");
-//   expect(res.text).toContain("Shanghai Disneyland");
-//   // Should exclude non-China destination
-//   expect(res.text).not.toContain("Jeju Island");
-// });
+test("GET /list?q=china returns only China destinations", async () => {
+  const res = await request(app).get("/list?q=china");
+  expect(res.statusCode).toBe(200);
+  // Should include China destinations
+  expect(res.text).toContain("Suzhou");
+  expect(res.text).toContain("Shanghai Disneyland");
+  // Should exclude non-China destination
+  expect(res.text).not.toContain("Jeju Island");
+});
 
-// // Edit existing destination (ID 1) page load test
-// // verifies that the edit page can be loaded for a valid destination ID.
-// // ensures the server responds with HTTP 200 and displays the edit form content.
-// test("GET /editTravel/1 loads edit page", async () => {
-//   const res = await request(app).get("/editTravel/1");
-//   // Page should load successfully
-//   expect(res.statusCode).toBe(200);
-//   // Page should contain the edit form heading (from app.js)
-//   expect(res.text).toContain("Edit Comic");
-// });
+// Edit existing destination (ID 1) page load test
+// verifies that the edit page can be loaded for a valid destination ID.
+// ensures the server responds with HTTP 200 and displays the edit form content.
+test("GET /editTravel/1 loads edit page", async () => {
+  const res = await request(app).get("/editTravel/1");
+  // Page should load successfully
+  expect(res.statusCode).toBe(200);
+  // Page should contain the edit form heading (from app.js)
+  expect(res.text).toContain("Edit Comic");
+});
 
-// // Update existing destination (ID 1)
-// // verifies the update (edit) functionality for an existing destination.
-// // ensures the POST request updates the record and the updated destination name
-// // reflected on the /list page after the redirect.
-// test("POST /editTravel/1 updates destination and shows in list", async () => {
-//   // Send updated values to the edit endpoint
-//   const editRes = await request(app)
-//     .post("/editTravel/1")
-//     .type("form")
-//     .send({
-//       destination: "Updated Place",
-//       country: "China",
-//       description: "Updated",
-//     });
-//   // Edit route should redirect back to /list after saving changes
-//   expect(editRes.statusCode).toBe(302);
-//   expect(editRes.headers.location).toBe("/list");
-//   // Verify the updated destination appears on the list page
-//   const res = await request(app).get("/list");
-//   expect(res.statusCode).toBe(200);
-//   expect(res.text).toContain("Updated Place");
-// });
+// Update existing destination (ID 1)
+// verifies the update (edit) functionality for an existing destination.
+// ensures the POST request updates the record and the updated destination name
+// reflected on the /list page after the redirect.
+test("POST /editTravel/1 updates destination and shows in list", async () => {
+  // Send updated values to the edit endpoint
+  const editRes = await request(app)
+    .post("/editTravel/1")
+    .type("form")
+    .send({
+      destination: "Updated Place",
+      country: "China",
+      description: "Updated",
+    });
+  // Edit route should redirect back to /list after saving changes
+  expect(editRes.statusCode).toBe(302);
+  expect(editRes.headers.location).toBe("/list");
+  // Verify the updated destination appears on the list page
+  const res = await request(app).get("/list");
+  expect(res.statusCode).toBe(200);
+  expect(res.text).toContain("Updated Place");
+});
 
-// // Add page loads test
-// // Verify that the Add New Place page is reachable
-// // and the form fields for adding a destination are displayed correctly.
-// test("GET /add returns 200 and shows Add Place form", async () => {
-//   const res = await request(app).get("/add");
-//   // Page should load successfully
-//   expect(res.statusCode).toBe(200);
-//   // Page should contain the form title
-//   expect(res.text).toContain("Add a New Place");
-//   // Page should contain required input fields for adding a destination
-//   expect(res.text).toContain('name="destination"');
-//   expect(res.text).toContain('name="country"');
-//   expect(res.text).toContain('name="description"');
-// });
+// Add page loads test
+// Verify that the Add New Place page is reachable
+// and the form fields for adding a destination are displayed correctly.
+test("GET /add returns 200 and shows Add Place form", async () => {
+  const res = await request(app).get("/add");
+  // Page should load successfully
+  expect(res.statusCode).toBe(200);
+  // Page should contain the form title
+  expect(res.text).toContain("Add a New Place");
+  // Page should contain required input fields for adding a destination
+  expect(res.text).toContain('name="destination"');
+  expect(res.text).toContain('name="country"');
+  expect(res.text).toContain('name="description"');
+});
 
-// // Contact page loads test
-// // Verify that the Contact page is reachable
-// // and the contact form fields are rendered correctly.
-// test("GET /contact returns 200 and shows Contact form", async () => {
-//   const res = await request(app).get("/contact");
-//   // Page should load successfully
-//   expect(res.statusCode).toBe(200);
-//   // Page should contain the contact form title
-//   expect(res.text).toContain("Contact Me");
-//   // Page should contain required input fields for the contact form
-//   expect(res.text).toContain('name="name"');
-//   expect(res.text).toContain('name="phone"');
-//   expect(res.text).toContain('name="email"');
-//   expect(res.text).toContain('name="comment"');
-// });
+// Contact page loads test
+// Verify that the Contact page is reachable
+// and the contact form fields are rendered correctly.
+test("GET /contact returns 200 and shows Contact form", async () => {
+  const res = await request(app).get("/contact");
+  // Page should load successfully
+  expect(res.statusCode).toBe(200);
+  // Page should contain the contact form title
+  expect(res.text).toContain("Contact Me");
+  // Page should contain required input fields for the contact form
+  expect(res.text).toContain('name="name"');
+  expect(res.text).toContain('name="phone"');
+  expect(res.text).toContain('name="email"');
+  expect(res.text).toContain('name="comment"');
+});
 });
 
 
@@ -239,35 +239,35 @@ test("GET /list returns 200 and shows default destinations", async () => {
 
 // Search with spaces
 // return spaces when there are spaces
-// test("Edge: search with spaces (' jeju ') returns 404 because app does not trim", async () => {
-//   const res = await request(app).get("/list?q=%20jeju%20");
-//   expect(res.statusCode).toBe(404);
-//   expect(res.text).toContain("No destinations found");
-// });
-//failed version (expected behaviour is to trim spaces)
-test("Edge: search with spaces (' jeju ') should still find Jeju", async () => {
+test("Edge: search with spaces (' jeju ') returns 404 because app does not trim", async () => {
   const res = await request(app).get("/list?q=%20jeju%20");
-  expect(res.statusCode).toBe(200);
-  expect(res.text).toContain("Jeju");
+  expect(res.statusCode).toBe(404);
+  expect(res.text).toContain("No destinations found");
 });
+//failed version (expected behaviour is to trim spaces)
+// test("Edge: search with spaces (' jeju ') should still find Jeju", async () => {
+//   const res = await request(app).get("/list?q=%20jeju%20");
+//   expect(res.statusCode).toBe(200);
+//   expect(res.text).toContain("Jeju");
+// });
 
 
 
 // check duplicate destination names
 //when there is duplicated names the system wont crash or lag (allow duplicate entries)
-// test("Edge: adding duplicate destination should not crash", async () => {
-//   const name = "Duplicate_" + Date.now();
+test("Edge: adding duplicate destination should not crash", async () => {
+  const name = "Duplicate_" + Date.now();
 
-//   await request(app).post("/add").type("form").send({
-//     destination: name, country: "SG", description: "1", image: "a.jpg",
-//   });
+  await request(app).post("/add").type("form").send({
+    destination: name, country: "SG", description: "1", image: "a.jpg",
+  });
 
-//   const res = await request(app).post("/add").type("form").send({
-//     destination: name, country: "SG", description: "2", image: "b.jpg",
-//   });
+  const res = await request(app).post("/add").type("form").send({
+    destination: name, country: "SG", description: "2", image: "b.jpg",
+  });
 
-//   expect(res.statusCode).toBe(302);
-// });
+  expect(res.statusCode).toBe(302);
+});
 // FAILED version – expected behaviour ( no validation/ duplicate check)
 // test("Edge: duplicate destination should be rejected", async () => {
 //   const name = "Duplicate_" + Date.now();
